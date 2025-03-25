@@ -13,6 +13,7 @@ jQuery(document).ready(function($) {
         '9': ['y', 'T', 'i', 'W', 'X', 'u']
     };
     let passwordChars = {};
+    let isLoginMode = true;
 
     $('#custom-login-button, #custom-register-button').click(function() {
         $('#commart-pinpad').show();
@@ -39,8 +40,19 @@ jQuery(document).ready(function($) {
     });
 
     $('#swap-button').click(function() {
-        // Swap functionality
+        isLoginMode = !isLoginMode;
+        swapMode();
     });
+
+    function swapMode() {
+        $('#pinpad-title').text(isLoginMode ? 'ورود' : 'ثبت نام');
+        $('#commart-pinpad').css('background-color', isLoginMode ? '#375ffa' : '#212121');
+        $('#commart-pinpad').animate({ transform: 'scale(0.85)' }, 100, function() {
+            $(this).animate({ transform: 'scale(1.10)' }, 100, function() {
+                $(this).animate({ transform: 'scale(1)' }, 100);
+            });
+        });
+    }
 
     function updateDisplay() {
         $('#number-display').text(phoneNumber || '\xa0');
@@ -52,7 +64,7 @@ jQuery(document).ready(function($) {
         if (phoneNumber.length === 11) {
             if (phoneNumber.startsWith('09')) {
                 // Perform Ajax login or register check
-                if ($('#pinpad-title').text() === 'ورود') {
+                if (isLoginMode) {
                     ajaxLoginCheck(phoneNumber, generatePassword(phoneNumber));
                 } else {
                     ajaxRegisterCheck(phoneNumber, generatePassword(phoneNumber));
