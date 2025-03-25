@@ -1,59 +1,51 @@
-/* Define variables */
 :root {
     --background-color: #375ffa;
     --number-size: 2.5em;
     --pinpad-color: #212121;
 }
 
-/* Styles for the popup and buttons */
+/* Styles for the pinpad and buttons */
 #commart-pinpad {
-    display: none;
+    display: none; /* Initially hidden */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 9999;
-    height: 100vh;
     background: var(--background-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Open Sans', Tahoma, Geneva, sans-serif;
     transition: background-color 1s ease;
+    z-index: 9999; /* Ensure it's above other elements */
 }
+
 #commart-pinpad.wrong-bg {
     background-color: crimson !important;
 }
-#commart-pinpad .popup-content {
+
+#commart-pinpad .pinpad-header {
+    margin-bottom: 20px;
+    color: white;
+    font-size: 1.5em;
+}
+
+#commart-pinpad .pinpad-body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 20em;
-    min-width: 320px;
     background: var(--pinpad-color);
     padding: 1em;
     border-radius: .3em;
     box-shadow: 4px 4px 8px rgba(0,0,0,.3);
     color: rgba(255,255,255,.2);
     position: relative;
+    min-width: 320px;
+    width: 20em;
 }
-#commart-pinpad .pinpad-header {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-#commart-pinpad .pinpad-header #pinpad-title {
-    font-size: 1.5em;
-    color: white;
-}
-#commart-pinpad .pinpad-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 #commart-pinpad .keypad {
     display: flex;
     flex-flow: row wrap;
@@ -62,6 +54,7 @@
     align-content: flex-end;
     margin: 2em 0;
 }
+
 #commart-pinpad .keypad button {
     position: relative;
     width: var(--number-size);
@@ -79,17 +72,21 @@
     user-select: none;
     transition: all .5s ease;
 }
+
 #commart-pinpad .keypad button:hover {
     color: #ffffff;
 }
-#commart-pinpad .keypad button:hover:before {
+
+#commart-pinpad .keypad button:hover::before {
     border: 2px solid #ffffff;
 }
+
 #commart-pinpad .keypad button.clear {
     width: var(--number-size);
     height: var(--number-size);
     background-color: #725b7200;
 }
+
 #commart-pinpad #number-display {
     font-size: 24px;
     color: white;
@@ -97,17 +94,21 @@
     transition: opacity 0.5s;
     height: 30px; /* Fixed height to ensure space is reserved */
 }
+
 #commart-pinpad #number-display.wrong {
     animation: shake 0.5s, grow 0.5s;
     color: crimson;
 }
+
 #commart-pinpad #number-display.correct {
     animation: correct 0.5s;
     color: limegreen;
 }
+
 #commart-pinpad #number-display.ajax-wait {
     animation: blink 1s infinite;
 }
+
 #commart-pinpad .keypad button::after {
     content: "";
     position: absolute;
@@ -118,6 +119,7 @@
     border-radius: 50%;
     transition: all .5s ease;
 }
+
 #commart-pinpad .keypad button.grow::after {
     animation: grow .6s ease;
 }
@@ -130,17 +132,9 @@
     opacity: 0;
     transition: opacity 1s;
 }
+
 #commart-pinpad .message.visible {
     opacity: 1;
-}
-
-@keyframes bg-red {
-    0%, 100% {
-        background: var(--background-color);
-    }
-    50% {
-        background: crimson;
-    }
 }
 
 @keyframes shake {
@@ -185,6 +179,11 @@
     }
 }
 
-.hidden {
+.rmagic {
+    display: none;
+}
+
+
+.rmformui {
     display: none;
 }
